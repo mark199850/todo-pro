@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import DailyTodo from '../components/DailyTodo.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <DailyTodo />
   </main>
 </template>

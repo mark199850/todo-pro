@@ -1,3 +1,7 @@
+<script setup lang="ts">
+defineEmits(['remove'])
+</script>
+
 <template>
   <div class="item">
     <i>
@@ -5,14 +9,23 @@
     </i>
     <div class="details">
       <h3>
-        <slot name="heading"></slot>
+        <slot name="todoText"></slot>
       </h3>
       <slot></slot>
     </div>
+    <button class="removeButton" @click="$emit('remove')">X</button>
   </div>
 </template>
 
 <style scoped>
+.removeButton {
+  background-color: hsla(160, 100%, 37%, 1);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
 .item {
   margin-top: 2rem;
   display: flex;
