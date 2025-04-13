@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Calendar from './components/Calendar.vue'
+
+defineProps<{
+  msg: string
+}>()
 </script>
 
 <template>
@@ -8,7 +12,11 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="ToDo Pro" />
+      <div class="title">
+        <h1 class="green">ToDo Pro</h1>
+        <h3>Select a date to view and manage your todos</h3>
+        <Calendar />
+      </div>
       <nav>
         <RouterLink to="/">ToDo List</RouterLink>
         <RouterLink to="/weather">Weather</RouterLink>
@@ -20,6 +28,29 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
+h1 {
+  font-weight: 500;
+  font-size: 2.6rem;
+  position: relative;
+  top: -10px;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+.title h1,
+.title h3 {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .title h1,
+  .title h3 {
+    text-align: left;
+  }
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
