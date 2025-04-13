@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { todoApi } from '../api/todoApi'
+import { todoApi } from '../dummy-api/todoApi'
 import { ref, computed } from 'vue'
-import type { Todo } from '../api/db'
+import type { Todo } from '../dummy-api/db'
 
 export const useTodoStore = defineStore('todo', () => {
   // State

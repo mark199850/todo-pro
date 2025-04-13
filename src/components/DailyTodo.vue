@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import TodoItem from './TodoItem.vue'
 import PenIcon from './icons/IconPen.vue'
 import { useTodoStore } from '../stores/todoStore'
-
+import type { Todo } from '../dummy-api/db'
 const todoStore = useTodoStore()
 const newTodo = ref('')
 
@@ -14,7 +14,7 @@ const addTodo = async () => {
   }
 }
 
-const removeTodo = async (todo) => {
+const removeTodo = async (todo: Todo) => {
   await todoStore.removeTodo(todo.id)
 }
 </script>

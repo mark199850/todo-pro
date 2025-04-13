@@ -23,7 +23,7 @@ const daysInMonth = computed(() => {
 
 const firstDayOfMonth = computed(() => {
   const { month, year } = currentMonth.value
-  return new Date(year, month, 1).getDay()
+  return new Date(year, month, 0).getDay()
 })
 
 const calendarDays = computed(() => {
@@ -101,13 +101,13 @@ const selectDate = (date: Date) => {
     </div>
 
     <div class="weekdays">
-      <div>Sun</div>
       <div>Mon</div>
       <div>Tue</div>
       <div>Wed</div>
       <div>Thu</div>
       <div>Fri</div>
       <div>Sat</div>
+      <div>Sun</div>
     </div>
 
     <div class="days">
