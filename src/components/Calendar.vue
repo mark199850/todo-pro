@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
+import { useDateSelectionStore } from '@/stores/dateSelectionStore'
+import { useWeatherStore } from '@/stores/weatherStore'
 
 const todoStore = useTodoStore()
-
+const dateSelectionStore = useDateSelectionStore()
+const weatherStore = useWeatherStore()
 const currentDate = ref(new Date())
 const selectedDate = computed(() => {
-  const dateParts = todoStore.selectedDate.split('-')
+  const dateParts = dateSelectionStore.selectedDate.split('-')
   return new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2]))
 })
 
@@ -87,7 +90,9 @@ const nextMonth = () => {
 
 const selectDate = (date: Date) => {
   if (date) {
-    todoStore.setSelectedDate(formatDate(date))
+    dateSelectionStore.setSelectedDate(formatDate(date))
+    todoStore.fetchTodos()
+    weatherStore.fetchWeather()
   }
 }
 </script>

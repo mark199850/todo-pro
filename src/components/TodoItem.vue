@@ -1,12 +1,11 @@
 <script setup lang="ts">
-defineEmits(['remove'])
+defineEmits(['remove', 'complete'])
+const props = defineProps({ completed: Boolean })
 </script>
 
 <template>
   <div class="item">
-    <i>
-      <slot name="icon"></slot>
-    </i>
+    <input type="checkbox" @click="$emit('complete')" v-bind:checked="props.completed" />
     <div class="details">
       <h3>
         <slot name="todoText"></slot>
@@ -18,6 +17,9 @@ defineEmits(['remove'])
 </template>
 
 <style scoped>
+input {
+  accent-color: hsla(160, 100%, 37%, 1);
+}
 .removeButton {
   background-color: hsla(160, 100%, 37%, 1);
   color: white;
@@ -25,6 +27,7 @@ defineEmits(['remove'])
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
+  margin-left: 1rem;
 }
 .item {
   margin-top: 2rem;
@@ -37,16 +40,6 @@ defineEmits(['remove'])
   margin-left: 1rem;
 }
 
-i {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-
-  color: var(--color-text);
-}
-
 h3 {
   font-size: 1.2rem;
   font-weight: 500;
@@ -57,7 +50,7 @@ h3 {
 @media (min-width: 1024px) {
   .item {
     margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
+    padding: 0.4rem 0 1rem 0;
   }
 
   i {

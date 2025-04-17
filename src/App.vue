@@ -24,8 +24,24 @@ defineProps<{
     </div>
   </header>
 
-  <RouterView />
+  <div class="view-container">
+    <router-view v-slot="{ Component, route }">
+      <transition name="slide-fade">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
+  </div>
 </template>
+
+<style>
+:root {
+  /* Transition customization variables */
+  --transition-duration: 0.3s;
+  --transition-easing: cubic-bezier(1, 0, 0, 1.2); /* Default is a nice easeOutQuart */
+  --slide-distance: -200px;
+  --fade-start-opacity: 0;
+}
+</style>
 
 <style scoped>
 h1 {
@@ -86,6 +102,30 @@ nav a:first-of-type {
   border: 0;
 }
 
+.view-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Slide-fade transition styles using CSS variables */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all var(--transition-duration) var(--transition-easing);
+  position: absolute;
+}
+
+.slide-fade-enter-from {
+  opacity: var(--fade-start-opacity);
+  transform: translateY(var(--slide-distance));
+}
+
+.slide-fade-leave-to {
+  opacity: var(--fade-start-opacity);
+  transform: translateY(calc(-1 * var(--slide-distance)));
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -111,5 +151,10 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+
+.view-container {
+  position: relative;
+  min-height: 400px; /* Adjust based on your content */
 }
 </style>

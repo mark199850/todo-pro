@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import TodoItem from './TodoItem.vue'
-import PenIcon from './icons/IconPen.vue'
 import { useTodoStore } from '../stores/todoStore'
-import type { Todo } from '../dummy-api/db'
+import type { Todo } from '../dummy-api/todo-api/db'
+import { useDateSelectionStore } from '../stores/dateSelectionStore'
+
 const todoStore = useTodoStore()
+const dateSelectionStore = useDateSelectionStore()
 const newTodo = ref('')
 
 const addTodo = async () => {
@@ -17,13 +19,19 @@ const addTodo = async () => {
 const removeTodo = async (todo: Todo) => {
   await todoStore.removeTodo(todo.id)
 }
+
+const completeTodo = async (todo: Todo) => {
+  await todoStore.completeTodo(todo.id)
+}
 </script>
 
 <template>
   <div class="daily-todo">
-    <h2>Todos for {{ todoStore.selectedDate }}</h2>
+    <h2>Todos for {{ dateSelectionStore.selectedDate }}</h2>
 
-    <div v-if="todoStore.isLoading" class="loading">Loading todos...</div>
+    <Transition name="indicator">
+      <div v-if="todoStore.isLoading" class="loading">Loading todos...</div>
+    </Transition>
 
     <form @submit.prevent="addTodo" class="todo-form">
       <input v-model="newTodo" required placeholder="Add a new todo" class="todo-input" />
@@ -36,10 +44,11 @@ const removeTodo = async (todo: Todo) => {
 
     <ul class="todo-list">
       <li v-for="todo in todoStore.todos" :key="todo.id">
-        <TodoItem @remove="removeTodo(todo)">
-          <template #icon>
-            <PenIcon />
-          </template>
+        <TodoItem
+          @remove="removeTodo(todo)"
+          @complete="completeTodo(todo)"
+          v-bind:completed="todo.completed"
+        >
           <template #todoText>{{ todo.description }}</template>
         </TodoItem>
       </li>
@@ -67,8 +76,22 @@ h2 {
 
 .loading {
   text-align: center;
-  padding: 1rem;
+  padding: 0rem 1rem;
   color: #aaa;
+  max-height: 2rem;
+}
+
+.indicator-enter-active,
+.indicator-leave-active {
+  transition:
+    opacity 0.25s ease-out,
+    max-height 0.25s ease-out;
+}
+
+.indicator-enter-from,
+.indicator-leave-to {
+  opacity: 0;
+  max-height: 0;
 }
 
 .todo-form {
@@ -113,6 +136,9 @@ h2 {
 }
 
 .todo-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
   margin: 0;
