@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import DailyTodo from '../components/DailyTodo.vue'
+import DailyTodoCard from '../components/cards/caily-todo-card/DailyTodoCard.vue'
 </script>
 
 <template>
-  <main>
-    <DailyTodo />
+  <main class="view-content">
+    <DailyTodoCard />
   </main>
 </template>
+
+<style scoped>
+.view-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+</style>

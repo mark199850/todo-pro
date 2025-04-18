@@ -99,7 +99,7 @@ const selectDate = (date: Date) => {
 
 <template>
   <div class="calendar">
-    <div class="calendar-header">
+    <div class="header">
       <button @click="prevMonth" class="nav-button">&lt;</button>
       <h2>{{ monthNames[currentMonth.month] }} {{ currentMonth.year }}</h2>
       <button @click="nextMonth" class="nav-button">&gt;</button>
@@ -136,38 +136,39 @@ const selectDate = (date: Date) => {
 <style scoped>
 .calendar {
   max-width: 600px;
-  margin: 2rem auto;
-  background-color: #2c3e50;
+  min-width: 225px;
+  margin: var(--space-md) auto;
+  background-color: var(--color-background-semi-dark);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.calendar-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
 }
 
-.calendar-header h2 {
-  color: #fff;
-  margin: 0;
-  font-size: 1.5rem;
+.header h2 {
+  font-weight: bold;
+  color: var(--color-text-light);
 }
 
 .nav-button {
-  background-color: #42b883;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space-md);
   cursor: pointer;
   font-weight: bold;
+  transition: background-color var(--transition-duration);
 }
 
 .nav-button:hover {
-  background-color: #3aa876;
+  background-color: var(--color-primary-hover);
 }
 
 .weekdays {
@@ -175,8 +176,8 @@ const selectDate = (date: Date) => {
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #42b883;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
 }
 
 .days {
@@ -191,14 +192,14 @@ const selectDate = (date: Date) => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 4px;
-  color: #fff;
+  border-radius: var(--border-radius);
+  color: var(--color-text-light);
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-duration);
 }
 
 .day-cell:hover:not(.empty) {
-  background-color: #3a4a5e;
+  background-color: var(--color-background-semi-dark);
 }
 
 .empty {
@@ -206,14 +207,14 @@ const selectDate = (date: Date) => {
 }
 
 .today {
-  background-color: #42b883;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
   font-weight: bold;
 }
 
 .selected {
-  background-color: #35495e;
-  border: 2px solid #42b883;
+  background-color: var(--color-background-darker);
+  border: 2px solid var(--color-primary);
 }
 
 @media (min-width: 1024px) {

@@ -33,16 +33,6 @@ defineProps<{
   </div>
 </template>
 
-<style>
-:root {
-  /* Transition customization variables */
-  --transition-duration: 0.3s;
-  --transition-easing: cubic-bezier(1, 0, 0, 1.2); /* Default is a nice easeOutQuart */
-  --slide-distance: -200px;
-  --fade-start-opacity: 0;
-}
-</style>
-
 <style scoped>
 h1 {
   font-weight: 500;
@@ -60,16 +50,8 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .title h1,
-  .title h3 {
-    text-align: left;
-  }
-}
-
 header {
   line-height: 1.5;
-  max-height: 100vh;
 }
 
 .logo {
@@ -79,13 +61,13 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 2rem;
   text-align: center;
-  margin-top: 2rem;
+  margin: auto;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: var(--color-text-muted);
 }
 
 nav a.router-link-exact-active:hover {
@@ -95,7 +77,7 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border-dark);
 }
 
 nav a:first-of-type {
@@ -103,30 +85,38 @@ nav a:first-of-type {
 }
 
 .view-container {
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 400px;
 }
 
-/* Slide-fade transition styles using CSS variables */
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all var(--transition-duration) var(--transition-easing);
+  transition: all var(--transition-duration) var(--transition-easing-slowstart);
   position: absolute;
+  width: var(--card-width);
+  max-width: 100%;
 }
 
 .slide-fade-enter-from {
-  opacity: var(--fade-start-opacity);
-  transform: translateY(var(--slide-distance));
+  opacity: 0;
+  transform: translateY(-200px);
 }
 
 .slide-fade-leave-to {
-  opacity: var(--fade-start-opacity);
-  transform: translateY(calc(-1 * var(--slide-distance)));
+  opacity: 0;
+  transform: translateY(200px);
 }
 
 @media (min-width: 1024px) {
+  .title h1,
+  .title h3 {
+    text-align: left;
+  }
+
   header {
     display: flex;
     place-items: center;
@@ -134,7 +124,7 @@ nav a:first-of-type {
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0 var(--space-xl) 0 0;
   }
 
   header .wrapper {
@@ -147,14 +137,39 @@ nav a:first-of-type {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    padding: var(--space-md) 0;
+    margin-top: var(--space-md);
   }
 }
 
-.view-container {
-  position: relative;
-  min-height: 400px; /* Adjust based on your content */
+@media (max-width: 1023px) {
+  .wrapper {
+    height: auto;
+  }
+
+  .view-container {
+    display: flex;
+    height: auto;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+  }
+
+  .slide-fade-enter-from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  .slide-fade-leave-to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@media (max-width: 640px) {
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    width: 100%;
+  }
 }
 </style>

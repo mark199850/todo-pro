@@ -1,52 +1,38 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  --color-primary: #42b883;
+  --color-primary-hover: #3aa876;
+  --color-background-semi-dark: #3a4a5e;
+  --color-background-dark: #2c3e50;
+  --color-background-darker: #35495e;
+  --color-background-darkest: #181818;
+  --color-border-dark: #3a4a5e;
+  --color-text-light: #ffffff;
+  --color-text-muted: #aaaaaa;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
 
-  --vt-c-indigo: #2c3e50;
+  --card-width: 500px;
+  --card-max-height: 70vh;
+  --border-radius: 8px;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --transition-duration: 0.3s;
+  --transition-easing-slowstart: cubic-bezier(1, 0, 0.2, 1.2);
+  --transition-easing-quickstart: cubic-bezier(0.5, 0, 0.2, 1.2);
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
   --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-background: var(--color-background-darkest);
   }
 }
 
@@ -60,7 +46,7 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: var(--color-text-muted);
   background: var(--color-background);
   transition:
     color 0.5s,
